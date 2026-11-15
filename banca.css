@@ -1,0 +1,6 @@
+/* Tema Banca: azul institucional */
+body[data-tema="banca"]{--fondo:#0a1020;--panel:#111a2e;--borde:#1e2a44;--acento:#38bdf8;--brillo:rgba(56,189,248,.16)}
+body[data-tema="banca"] .suc .num{color:var(--acento)}
+body[data-tema="banca"] #panel-gerencia{border-color:#2b4a7a}
+#sesion{display:flex;gap:8px;align-items:center}
+.modal-caja h2{margin-bottom:0}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banca · Analítica de sucursales</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun.css">
+<link rel="stylesheet" href="banca.css">
+</head>
+<body data-tema="banca">
+<header id="barra" class="barra"></header>
+
+<main class="contenedor">
+  <section class="encabezado">
+    <div>
+      <p class="etiqueta">Banca · Red de sucursales</p>
+      <h1>Analítica de ocupación y eficiencia</h1>
+    </div>
+    <div id="sesion"></div>
+  </section>
+
+  <section class="grid kpis">
+    <article class="tarjeta kpi"><span class="etiqueta">Ocupación actual</span><b id="k-ocup">0</b><small id="k-ocup-sub"></small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Temperatura del salón</span><b id="k-temp">--</b><small id="k-temp-sub"></small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Pico de hoy</span><b id="k-pico">0</b><small id="k-pico-sub"></small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Visitantes hoy</span><b id="k-visitas">0</b><small>ingresos registrados</small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Baja demanda</span><b id="k-ahorro">--</b><small>del horario con 2 personas o menos: oportunidad de ahorro (estimación)</small></article>
+  </section>
+
+  <section class="tarjeta">
+    <h2>Red de sucursales</h2>
+    <div id="sucursales" class="grid sucursales"></div>
+    <p id="nota-red" class="nota"></p>
+  </section>
+
+  <section class="grid dos">
+    <article class="tarjeta">
+      <h2>Horas pico (lunes a viernes, últimos 7 días)</h2>
+      <div class="lienzo"><canvas id="g-horas"></canvas></div>
+      <p id="t-picos" class="nota"></p>
+    </article>
+    <article class="tarjeta">
+      <h2>Alertas</h2>
+      <ul id="alertas" class="alertas"></ul>
+    </article>
+  </section>
+
+  <section class="tarjeta">
+    <div class="fila-titulo"><h2>Historial</h2><div id="g-botones" class="chips"></div></div>
+    <div class="lienzo alto"><canvas id="g-hist"></canvas></div>
+    <p id="g-estado" class="nota"></p>
+  </section>
+
+  <section id="panel-gerencia" class="tarjeta oculto">
+    <h2>Panel de gerencia <span class="insignia">solo personal autorizado</span></h2>
+    <div class="campos">
+      <label>Umbral de ocupación<input id="c-umbral" type="number" min="1"></label>
+      <label>Temp. mínima (°C)<input id="c-tmin" type="number"></label>
+      <label>Temp. máxima (°C)<input id="c-tmax" type="number"></label>
+      <label>Apertura (hora)<input id="c-apertura" type="number" min="0" max="23"></label>
+      <label>Cierre (hora)<input id="c-cierre" type="number" min="1" max="24"></label>
+    </div>
+    <div class="fila-botones">
+      <button id="btn-guardar" class="btn">💾 Guardar</button>
+      <button id="btn-csv" class="btn sec">⬇️ Exportar historial (CSV)</button>
+    </div>
+  </section>
+
+  <section id="panel-pruebas" class="tarjeta oculto">
+    <h2>🧪 Panel de pruebas (solo demo)</h2>
+    <div class="fila-botones">
+      <button class="btn" data-ev="E" data-n="1">➕ Entra 1</button>
+      <button class="btn" data-ev="E" data-n="5">➕ Entran 5</button>
+      <button class="btn sec" data-ev="S" data-n="1">➖ Sale 1</button>
+    </div>
+    <p class="nota">Hace entrar o salir gente en la simulación para ver cómo reaccionan las alertas.</p>
+  </section>
+</main>
+
+<div id="modal-login" class="modal oculto">
+  <div class="modal-caja">
+    <h2>🔐 Acceso del personal</h2>
+    <input id="login-mail" type="email" placeholder="correo" autocomplete="username">
+    <input id="login-pass" type="password" placeholder="contraseña" autocomplete="current-password">
+    <p id="login-error" class="error"></p>
+    <div class="fila-botones">
+      <button id="login-ok" class="btn">Entrar</button>
+      <button id="login-cancelar" class="btn sec">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script type="module" src="banca.js"></script>
+</body>
+</html>
