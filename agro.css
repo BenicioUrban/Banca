@@ -1,0 +1,10 @@
+/* Tema Agro: verde campo */
+body[data-tema="agro"]{--fondo:#0a1610;--panel:#102019;--borde:#1d3a2b;--acento:#4ade80;--brillo:rgba(74,222,128,.14)}
+body[data-tema="agro"] .suc{background:#0c1a13}
+body[data-tema="agro"] .chip,body[data-tema="agro"] .btn.sec{background:#183326}
+body[data-tema="agro"] input,body[data-tema="agro"] select{background:#0a1610}
+
+/* medidor de ITH */
+.medidor{position:relative;height:16px;border-radius:99px;margin:22px 0 8px;background:#183326}
+.medidor i{position:absolute;top:-5px;left:0;width:4px;height:26px;background:#fff;border-radius:2px;transform:translateX(-2px);transition:left .6s}
+.escala{display:flex;justify-content:space-between;font-size:.72rem;color:var(--suave)}

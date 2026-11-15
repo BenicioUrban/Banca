@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aforo · Control en tiempo real</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun.css">
+<link rel="stylesheet" href="aforo.css">
+</head>
+<body data-tema="aforo">
+<header id="barra" class="barra"></header>
+
+<main class="contenedor">
+  <section class="encabezado">
+    <div>
+      <p class="etiqueta">Gastronomía · Eventos · Turismo</p>
+      <h1>Control de aforo habilitado</h1>
+    </div>
+    <button id="btn-pantalla" class="btn">📺 Pantalla de ingreso</button>
+  </section>
+
+  <section id="banner-completo" class="banner-completo oculto">🚨 AFORO COMPLETO · DETENER EL INGRESO</section>
+
+  <section id="hero" class="tarjeta" data-nivel="verde">
+    <p class="etiqueta">Personas adentro</p>
+    <div class="hero-num" id="h-num">0</div>
+    <p class="hero-sub">de <b id="h-max">50</b> permitidas · lugares libres: <b id="h-libres">50</b> · <span id="h-pct">0%</span></p>
+    <div class="barra-prog grande"><i id="h-barra" style="width:0%"></i></div>
+    <p class="hero-estado" id="h-estado">Ingreso libre</p>
+    <p id="h-sub" class="nota"></p>
+    <p id="h-pred" class="nota"></p>
+    <button id="btn-salir-pantalla" class="btn sec oculto">✖ Salir de pantalla completa</button>
+  </section>
+
+  <section class="grid kpis">
+    <article class="tarjeta kpi"><span class="etiqueta">Ingresos hoy</span><b id="k-ingresos">0</b><small>personas que entraron</small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Salidas hoy</span><b id="k-salidas">0</b><small>personas que salieron</small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Pico de hoy</span><b id="k-pico">0</b><small id="k-pico-sub"></small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Tiempo a aforo completo</span><b id="k-completo">0</b><small>minutos hoy</small></article>
+  </section>
+
+  <section class="grid dos">
+    <article class="tarjeta">
+      <h2>Ingresos por hora (hoy)</h2>
+      <div class="lienzo"><canvas id="g-flujo"></canvas></div>
+    </article>
+    <article class="tarjeta">
+      <h2>Confort del salón</h2>
+      <div class="grid kpis" style="grid-template-columns:repeat(3,1fr)">
+        <div class="kpi"><span class="etiqueta">Temperatura</span><b id="k-temp">--</b></div>
+        <div class="kpi"><span class="etiqueta">Humedad</span><b id="k-hum">--</b></div>
+        <div class="kpi"><span class="etiqueta">Sensación</span><b id="k-sens">--</b></div>
+      </div>
+      <p id="t-confort" class="nota"></p>
+      <h2 style="margin-top:16px">Alertas</h2>
+      <ul id="alertas" class="alertas"></ul>
+    </article>
+  </section>
+
+  <section class="tarjeta">
+    <div class="fila-titulo"><h2>Historial de ocupación</h2><div id="g-botones" class="chips"></div></div>
+    <div class="lienzo alto"><canvas id="g-hist"></canvas></div>
+    <p id="g-estado" class="nota"></p>
+  </section>
+
+  <section class="tarjeta">
+    <h2>Configuración del local</h2>
+    <div class="fila-botones" style="margin-top:0">
+      <label>Aforo máximo habilitado<input id="c-max" type="number" min="1"></label>
+      <button id="btn-guardar" class="btn">💾 Guardar</button>
+    </div>
+    <p class="nota">El aforo máximo se guarda en Firebase y se ve igual desde cualquier dispositivo.</p>
+  </section>
+
+  <section id="panel-pruebas" class="tarjeta oculto">
+    <h2>🧪 Panel de pruebas (solo demo)</h2>
+    <div class="fila-botones">
+      <button class="btn" data-ev="E" data-n="1">➕ Entra 1</button>
+      <button class="btn" data-ev="E" data-n="5">➕ Entran 5</button>
+      <button class="btn" data-ev="E" data-n="10">➕ Entran 10</button>
+      <button class="btn sec" data-ev="S" data-n="1">➖ Sale 1</button>
+      <button class="btn sec" data-ev="S" data-n="5">➖ Salen 5</button>
+    </div>
+    <p class="nota">Llená el local para ver el semáforo, la alarma y la predicción de llenado.</p>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script type="module" src="aforo.js"></script>
+</body>
+</html>

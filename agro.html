@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agro · Monitoreo ambiental y seguridad</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun.css">
+<link rel="stylesheet" href="agro.css">
+</head>
+<body data-tema="agro">
+<header id="barra" class="barra"></header>
+
+<main class="contenedor">
+  <section class="encabezado">
+    <div>
+      <p class="etiqueta">Agroindustria · Acopio, galpones y criaderos</p>
+      <h1>Monitoreo ambiental y seguridad en recintos</h1>
+    </div>
+  </section>
+
+  <section class="grid kpis">
+    <article class="tarjeta kpi"><span class="etiqueta">ITH actual</span><b id="k-ith">--</b><small id="k-ith-sub"></small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Temperatura</span><b id="k-temp">--</b><small>aire del recinto</small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Humedad</span><b id="k-hum">--</b><small>relativa</small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Personas adentro</span><b id="k-pers">0</b><small id="k-pers-sub"></small></article>
+    <article class="tarjeta kpi"><span class="etiqueta">Recuperación nocturna</span><b id="k-noche">--</b><small>horas bajo 21 °C anoche (el animal necesita varias para recuperarse)</small></article>
+  </section>
+
+  <section class="grid dos">
+    <article class="tarjeta">
+      <h2>Estrés calórico (ITH)</h2>
+      <div id="gauge-barra" class="medidor"><i id="gauge-marca"></i></div>
+      <div class="escala"><span>60</span><span id="gauge-a"></span><span id="gauge-p"></span><span id="gauge-e"></span><span>95</span></div>
+      <p id="t-recomendacion" class="nota"></p>
+      <div class="fila-botones">
+        <label>Tipo de animal
+          <select id="c-tipo"><option value="0">Bovinos de carne (INTA)</option><option value="1">Bovinos de leche (referencia)</option></select>
+        </label>
+      </div>
+    </article>
+    <article class="tarjeta">
+      <h2>Alertas</h2>
+      <ul id="alertas" class="alertas"></ul>
+    </article>
+  </section>
+
+  <section class="tarjeta">
+    <h2>Instalaciones</h2>
+    <div id="instalaciones" class="grid sucursales"></div>
+    <p id="nota-inst" class="nota"></p>
+  </section>
+
+  <section class="grid dos">
+    <article class="tarjeta">
+      <h2>Seguridad en espacios confinados</h2>
+      <p class="nota" style="margin-top:0">Control de ingreso a silos, tolvas o galpones: cuántas personas hay adentro y hace cuánto.</p>
+      <div class="fila-botones" style="margin-bottom:8px">
+        <label>Tiempo máximo adentro (min)<input id="c-maxmin" type="number" min="1"></label>
+        <label>Temp. máxima con personal (°C)<input id="c-tempmax" type="number"></label>
+        <button id="btn-guardar" class="btn sec">💾 Guardar</button>
+      </div>
+      <h2 style="margin-top:14px">Bitácora de accesos</h2>
+      <table><tbody id="bitacora"></tbody></table>
+    </article>
+    <article class="tarjeta">
+      <h2>Recomendación según el ITH</h2>
+      <p id="t-accion" style="line-height:1.5"></p>
+      <p class="nota">Umbrales de referencia para bovinos. Para cerdos u otras especies hay que usar otras tablas.</p>
+    </article>
+  </section>
+
+  <section class="tarjeta">
+    <div class="fila-titulo"><h2>Historial</h2><div id="g-botones" class="chips"></div></div>
+    <div class="lienzo alto"><canvas id="g-hist"></canvas></div>
+    <p id="g-estado" class="nota"></p>
+  </section>
+
+  <section id="panel-pruebas" class="tarjeta oculto">
+    <h2>🧪 Panel de pruebas (solo demo)</h2>
+    <div class="fila-botones">
+      <button class="btn" data-ev="E" data-n="1">➕ Entra 1</button>
+      <button class="btn sec" data-ev="S" data-n="1">➖ Sale 1</button>
+      <button id="btn-calor" class="btn">🔥 Ola de calor</button>
+      <button id="btn-normal" class="btn sec">❄️ Temperatura normal</button>
+      <button id="btn-atrapado" class="btn sec">👷 Persona adentro hace 45 min</button>
+    </div>
+    <p class="nota">Sirven para mostrar cómo reaccionan el ITH y las alertas de seguridad.</p>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script type="module" src="agro.js"></script>
+</body>
+</html>
